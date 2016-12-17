@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-TODAY LasLabs Inc.
+# Copyright 2016-TODAY LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
 from setuptools import setup
@@ -8,20 +8,20 @@ from tests import Tests
 
 
 setup_vals = {
-    'name': 'cfssl',
+    'name': 'red-october',
     'version': '0.0.1',
     'author': 'LasLabs Inc.',
     'author_email': 'support@laslabs.com',
-    'description': 'This library will allow you to interact with CFSSL '
+    'description': 'This library will allow you to interact with Red October '
                    'using Python.',
-    'url': 'https://github.com/laslabs/Python-CFSSL',
+    'url': 'https://laslabs.github.io/python-red-october',
+    'download_url': 'https://github.com/LasLabs/python-red-october',
     'license': 'MIT',
     'classifiers': [
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Operating System :: POSIX :: Linux',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
@@ -35,6 +35,7 @@ setup(
         'mock',
     ],
     install_requires=[
+        'enum34',
         'requests',
     ],
     **setup_vals
