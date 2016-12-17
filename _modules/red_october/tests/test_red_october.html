@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>red_october.tests.test_red_october &#8212; Python-Red-October 0.1.8 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for red_october.tests.test_red_october</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright 2016 LasLabs Inc.</span>
+<span class="c1"># License MIT (https://opensource.org/licenses/MIT).</span>
+
+<span class="kn">import</span> <span class="nn">mock</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">..models.enum_user_type</span> <span class="k">import</span> <span class="n">EnumUserType</span>
+<span class="kn">from</span> <span class="nn">..models.enum_user_role</span> <span class="k">import</span> <span class="n">EnumUserRole</span>
+
+<span class="kn">from</span> <span class="nn">..red_october</span> <span class="k">import</span> <span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span>
+                           <span class="n">RedOctoberDecryptException</span><span class="p">,</span>
+                           <span class="n">RedOctoberRemoteException</span><span class="p">,</span>
+                           <span class="n">requests</span><span class="p">,</span>
+                           <span class="p">)</span>
+
+
+<div class="viewcode-block" id="TestRedOctober"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober">[docs]</a><span class="k">class</span> <span class="nc">TestRedOctober</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestRedOctober.setUp"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TestRedOctober</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;password&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uses</span> <span class="o">=</span> <span class="mi">987</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owners</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Charles&#39;</span><span class="p">,</span> <span class="s1">&#39;Derphead&#39;</span><span class="p">,</span> <span class="s1">&#39;Ted&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;private&#39;</span><span class="p">,</span> <span class="s1">&#39;super-secure&#39;</span><span class="p">,</span> <span class="s1">&#39;definitely-tweetable&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta_str</span> <span class="o">=</span> <span class="s1">&#39;1234s&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_type</span> <span class="o">=</span> <span class="n">EnumUserType</span><span class="p">[</span><span class="s1">&#39;ecc&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;DATA&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_role</span> <span class="o">=</span> <span class="n">EnumUserRole</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data64</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;base64&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order_num</span> <span class="o">=</span> <span class="s1">&#39;AnAwesomeIdentifier!!&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span> <span class="o">=</span> <span class="n">RedOctober</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestRedOctober.test_uri_base_https"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_uri_base_https">[docs]</a>    <span class="k">def</span> <span class="nf">test_uri_base_https</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should have an HTTP URI by default &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">uri_base</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestRedOctober.test_uri_base_http"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_uri_base_http">[docs]</a>    <span class="k">def</span> <span class="nf">test_uri_base_http</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should have an HTTP URI if someone decides to be crazy &quot;&quot;&quot;</span>
+        <span class="n">red_october</span> <span class="o">=</span> <span class="n">RedOctober</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">,</span> <span class="n">red_october</span><span class="o">.</span><span class="n">uri_base</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_create_vault"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_create_vault">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_vault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">create_vault</span><span class="p">()</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;create&#39;</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_delegate"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_delegate">[docs]</a>    <span class="k">def</span> <span class="nf">test_delegate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Uses&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses</span><span class="p">,</span>
+            <span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_str</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">delegate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses</span><span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;delegate&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_create_user"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_create_user">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;UserType&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_type</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_type</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;create-user&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_get_summary"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_get_summary">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">get_summary</span><span class="p">()</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;summary&#39;</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_encrypt"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_encrypt">[docs]</a>    <span class="k">def</span> <span class="nf">test_encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Minimum&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses</span><span class="p">,</span>
+            <span class="s1">&#39;Owners&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">owners</span><span class="p">,</span>
+            <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data64</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uses</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">owners</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;encrypt&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_decrypt"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_decrypt">[docs]</a>    <span class="k">def</span> <span class="nf">test_decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data64</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data64</span><span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;decrypt&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_decrypt_fail"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_decrypt_fail">[docs]</a>    <span class="k">def</span> <span class="nf">test_decrypt_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should raise proper error on failure. &quot;&quot;&quot;</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="n">RedOctoberRemoteException</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">RedOctoberDecryptException</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data64</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_get_owners"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_get_owners">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_owners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data64</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">get_owners</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data64</span><span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;owners&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_get_owners_fail"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_get_owners_fail">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_owners_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should raise proper error on failure. &quot;&quot;&quot;</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="n">RedOctoberRemoteException</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">RedOctoberDecryptException</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">get_owners</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data64</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_change_password"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_change_password">[docs]</a>    <span class="k">def</span> <span class="nf">test_change_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;NewPassword&#39;</span><span class="p">:</span> <span class="s1">&#39;new pass&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">change_password</span><span class="p">(</span><span class="s1">&#39;new pass&#39;</span><span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_modify_user_role"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_modify_user_role">[docs]</a>    <span class="k">def</span> <span class="nf">test_modify_user_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;ToModify&#39;</span><span class="p">:</span> <span class="s1">&#39;Derphead&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Command&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_role</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">modify_user_role</span><span class="p">(</span><span class="s1">&#39;Derphead&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_role</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;modify&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_purge_delegates"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_purge_delegates">[docs]</a>    <span class="k">def</span> <span class="nf">test_purge_delegates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">purge_delegates</span><span class="p">()</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;purge&#39;</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_create_order"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_create_order">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Labels&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span>
+            <span class="s1">&#39;Duration&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_str</span><span class="p">,</span>
+            <span class="s1">&#39;Uses&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses</span><span class="p">,</span>
+            <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data64</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data64</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;order&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_get_orders_outstanding"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_get_orders_outstanding">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_orders_outstanding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">get_orders_outstanding</span><span class="p">()</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;orderout&#39;</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_get_order_information"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_get_order_information">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_order_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;OrderNum&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_num</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">get_order_information</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order_num</span><span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;orderinfo&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">RedOctober</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_cancel_order"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_cancel_order">[docs]</a>    <span class="k">def</span> <span class="nf">test_cancel_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;OrderNum&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_num</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">cancel_order</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order_num</span><span class="p">)</span>
+        <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;ordercancel&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">requests</span><span class="p">,</span> <span class="s1">&#39;request&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_call_request"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_call_request">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should call requests with proper args &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="s1">&#39;Password&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
+                <span class="p">}</span>
+        <span class="n">requests_return</span> <span class="o">=</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">requests</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">requests_return</span>
+        <span class="n">requests_return</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Status&#39;</span><span class="p">:</span> <span class="s1">&#39;ok&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">requests</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
+            <span class="n">method</span><span class="o">=</span><span class="s1">&#39;method&#39;</span><span class="p">,</span>
+            <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://test:1/endpoint&#39;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="s1">&#39;params&#39;</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">requests</span><span class="p">,</span> <span class="s1">&#39;request&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_call_error"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_call_error">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should raise on non-success response &quot;&quot;&quot;</span>
+        <span class="n">requests</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Status&#39;</span><span class="p">:</span> <span class="s1">&#39;not ok?&#39;</span><span class="p">}</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">RedOctoberRemoteException</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">requests</span><span class="p">,</span> <span class="s1">&#39;request&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_call_success"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_call_success">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should return result on success response &quot;&quot;&quot;</span>
+        <span class="n">requests</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Status&#39;</span><span class="p">:</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span>
+                                        <span class="s1">&#39;Response&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])</span></div>
+
+    <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">requests</span><span class="p">,</span> <span class="s1">&#39;request&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestRedOctober.test_call_success_bool"><a class="viewcode-back" href="../../../red_october.tests.html#red_october.tests.test_red_october.TestRedOctober.test_call_success_bool">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_success_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should return True on success with no response &quot;&quot;&quot;</span>
+        <span class="n">requests</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Status&#39;</span><span class="p">:</span> <span class="s1">&#39;ok&#39;</span><span class="p">}</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">red_october</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">res</span><span class="p">)</span></div></div>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, LasLabs Inc..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
