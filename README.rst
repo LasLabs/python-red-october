@@ -1,5 +1,6 @@
-| |Build Status| | |Coveralls Status| | |Codecov Status| | |Code Climate|
+|License MIT| | |Build Status| | |Coveralls Status| | |Codecov Status| | |Code Climate|
 
+==========================
 Python Red October Library
 ==========================
 
@@ -26,26 +27,55 @@ with Red October is encrypted with TLS, ensuring that passwords are not sent in 
   <https://github.com/cloudflare/redoctober>`_.
 
 Installation
-------------
+============
+
+* Install Python requirements ``pip install -r ./requirements``
 
 Setup
------
+=====
+
+A pre-existing CFSSL server is required to use this library.
 
 Usage
------
+=====
 
 * `Read The API Documentation <https://laslabs.github.io/python-red-october>`_
 
 Known Issues / Road Map
------------------------
+=======================
 
 -  Installation, setup, usage - in ReadMe
 
-.. |Build Status| image:: https://api.travis-ci.org/laslabs/Python-Red-October.svg?branch=master
-   :target: https://travis-ci.org/laslabs/Python-Red-October
-.. |Coveralls Status| image:: https://coveralls.io/repos/laslabs/Python-Red-October/badge.svg?branch=master
-   :target: https://coveralls.io/r/laslabs/Python-Red-October?branch=master
-.. |Codecov Status| image:: https://codecov.io/gh/laslabs/Python-Red-October/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/laslabs/Python-Red-October
+Credits
+=======
+
+Images
+------
+
+* LasLabs: `Icon <https://repo.laslabs.com/projects/TEM/repos/odoo-module_template/browse/module_name/static/description/icon.svg?raw>`_.
+
+Contributors
+------------
+
+* Dave Lasley <dave@laslabs.com>
+
+Maintainer
+----------
+
+.. image:: https://laslabs.com/logo.png
+   :alt: LasLabs Inc.
+   :target: https://laslabs.com
+
+This module is maintained by LasLabs Inc.
+
+.. |Build Status| image:: https://api.travis-ci.org/LasLabs/python-red-october.svg?branch=master
+   :target: https://travis-ci.org/LasLabs/python-red-october
+.. |Coveralls Status| image:: https://coveralls.io/repos/LasLabs/python-red-october/badge.svg?branch=master
+   :target: https://coveralls.io/r/LasLabs/python-red-october?branch=master
+.. |Codecov Status| image:: https://codecov.io/gh/laslabs/python-red-october/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/LasLabs/python-red-october
 .. |Code Climate| image:: https://codeclimate.com/github/laslabs/Python-Red-October/badges/gpa.svg
    :target: https://codeclimate.com/github/laslabs/Python-Red-October
+.. |License MIT| image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :target: https://opensource.org/licenses/MIT
+   :alt: License: AGPL-3
