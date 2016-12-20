@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-TODAY LasLabs Inc.
+# Copyright 2016-TODAY LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
 from setuptools import Command
@@ -15,7 +15,7 @@ class Tests(Command):
     ''' Run test & coverage, save reports as XML '''
 
     MODULE_NAMES = [
-        'cfssl',
+        'red-october',
     ]
     user_options = []  # < For Command API compatibility
 

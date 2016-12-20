@@ -14,7 +14,7 @@ exclude_lines =
 ignore_errors = True
 
 include =
-    */cfssl/*
+    */red_october/*
 
 omit =
     */virtualenv/*
