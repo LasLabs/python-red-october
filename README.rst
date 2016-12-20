@@ -34,7 +34,7 @@ Installation
 Setup
 =====
 
-A pre-existing CFSSL server is required to use this library.
+A pre-existing Red October server is required to use this library.
 
 Usage
 =====
