@@ -24,11 +24,11 @@ class RedOctober(object):
         """ It initializes the RedOctober API using the provided credentials.
 
         Args:
-            host: (str) Host name/IP of Red October server.
-            port: (int) Port number of server.
-            name: (str) Account name for use as login.
-            password: (str) Password for account.
-            ssl: (bool) Is server SSL encrypted?
+            host (str): Host name/IP of Red October server.
+            port (int): Port number of server.
+            name (str): Account name for use as login.
+            password (str): Password for account.
+            ssl (bool): Is server SSL encrypted?
         """
         ssl = 'https' if ssl else 'http'
         self.uri_base = '%s://%s:%d' % (ssl, host, port)
@@ -42,7 +42,7 @@ class RedOctober(object):
         It creates an admin account.
 
         Returns:
-            (bool) Status of vault creation
+            bool: Status of vault creation
         """
         return self.call('create')
 
@@ -55,11 +55,11 @@ class RedOctober(object):
         Any new delegation overrides the previous delegation.
 
         Args:
-            time: (datetime.timedelta) Period of time that delegation is valid
+            time (datetime.timedelta): Period of time that delegation is valid
                 for.
-            uses: (int) Number of times that delegation can be used.
+            uses (int): Number of times that delegation can be used.
         Returns:
-            (bool) Status of delegation creation.
+            bool: Status of delegation creation.
         """
         data = self._clean_mapping({
             'Time': time and '%ds' % time.total_seconds() or None,
@@ -75,10 +75,10 @@ class RedOctober(object):
         and if none is provided will default to ``rsa``.
 
         Args:
-            user_type: (str) Controls how the record is encrypted. This can have
+            user_type (str): Controls how the record is encrypted. This can have
                 a value of either ``ecc`` or ``rsa``.
         Returns:
-            (bool) Status of user creation.
+            bool: Status of user creation.
         """
         data = self._clean_mapping({
             'UserType': EnumUserType[user_type].name.upper(),
@@ -89,7 +89,7 @@ class RedOctober(object):
         """ It provides a list of keys and delegations for the server.
 
         Returns:
-            (dict) A mapping containing keys on the system, and users who have
+            dict: A mapping containing keys on the system, and users who have
                 currently delegated their key to the server. Example:
 
                 .. code-block:: python
@@ -122,13 +122,13 @@ class RedOctober(object):
         """ It allows a user to encrypt a piece of data.
 
         Args:
-            minimum: (int) Minimum number of users from ``owners`` set that
+            minimum (int): Minimum number of users from ``owners`` set that
                 must have delegated their keys to the server.
-            owners: (iter) Iterator of strings indicating users that may
+            owners (iter): Iterator of strings indicating users that may
                 decrypt the document.
-            data: (str) Data to encrypt.
+            data (str): Data to encrypt.
         Returns:
-            (str) Base64 encoded string representing the encrypted string.
+            str: Base64 encoded string representing the encrypted string.
         """
         data = self._clean_mapping({
             'Minimum': minimum,
@@ -141,14 +141,14 @@ class RedOctober(object):
         """ It allows a user to decrypt a piece of data.
 
         Args:
-            data: (str) Base64 encoded string representing the encrypted
+            data (str): Base64 encoded string representing the encrypted
                 string.
         Raises:
             RedOctoberDecryptException: If not enough ``minimum`` users from
                 the set of ``owners`` have delegated their keys to the server,
                 or if the decryption credentials are incorrect.
         Returns:
-            (str) Decrypted string
+            str: Decrypted string
         """
         data = self._clean_mapping({
             'Data': data,
@@ -162,13 +162,13 @@ class RedOctober(object):
         """ It provides the delegates required to decrypt a piece of data.
 
         Args:
-            data: (str) Base64 encoded string representing the encrypted
+            data (str): Base64 encoded string representing the encrypted
                 string.
         Raises:
             RedOctoberDecryptException: If incorrect decryption credentials
                 are provided.
         Returns:
-            (list) List of strings representing users that are able to decrypt
+            list: List of strings representing users that are able to decrypt
                 the data.
         """
         data = self._clean_mapping({
@@ -183,11 +183,11 @@ class RedOctober(object):
         """ It allows users to change their password.
 
         Args:
-            name: (str) Name of account.
-            password: (str) Password for account.
-            new_password: (str) New password for account.
+            name (str): Name of account.
+            password (str): Password for account.
+            new_password (str): New password for account.
         Returns:
-            (bool) Password change status.
+            bool: Password change status.
         """
         data = self._clean_mapping({
             'NewPassword': new_password,
@@ -198,13 +198,13 @@ class RedOctober(object):
         """ It allows for administration of user roles.
 
         Args:
-            modify_name: (str) Name of account to modify.
-            command: (str) Command to apply to user:
+            modify_name (str): Name of account to modify.
+            command (str): Command to apply to user:
                 ``admin``: Promote user to administrator.
                 ``revoke``: Revoke administrator rights.
                 ``delete``: Delete user.
         Returns:
-            (bool) Role modfication status.
+            bool: Role modfication status.
         """
         data = self._clean_mapping({
             'ToModify': modify_name,
@@ -216,7 +216,7 @@ class RedOctober(object):
         """ It deletes all delegates for an encryption key.
 
         Returns:
-            (bool) Purge status.
+            bool: Purge status.
         """
         return self.call('purge')
 
@@ -224,13 +224,13 @@ class RedOctober(object):
         """ It creates lets others users know delegations are needed.
 
         Args:
-            labels: (iter) Iterator of strings to label order with.
-            duration: (datetime.timedelta) Proposed duration of delegation.
-            uses: (int) Proposed delegation use amounts.
-            data: (str) Base64 encoded string representing the encrypted
+            labels (iter): Iterator of strings to label order with.
+            duration (datetime.timedelta): Proposed duration of delegation.
+            uses (int): Proposed delegation use amounts.
+            data (str): Base64 encoded string representing the encrypted
                 string.
         Returns:
-            (dict) Mapping representing the newly created order. Example:
+            dict: Mapping representing the newly created order. Example:
 
             .. code-block:: python
 
@@ -263,7 +263,7 @@ class RedOctober(object):
         """ It returns a mapping of current orders.
 
         Returns:
-            (dict) Mapping representing the currently open orders. Example:
+            dict: Mapping representing the currently open orders. Example:
 
             .. code-block:: python
 
@@ -286,9 +286,9 @@ class RedOctober(object):
         """ It gets information for a specified order.
 
         Args:
-            order_num: (str) Order number to get.
+            order_num (str): Order number to get.
         Returns:
-            (dict) Mapping representing the order information. Example:
+            dict: Mapping representing the order information. Example:
 
             .. code-block:: python
 
@@ -318,9 +318,9 @@ class RedOctober(object):
         """ It cancels an order by number.
 
         Args:
-            order_num: (str) Order number to get.
+            order_num (str): Order number to get.
         Returns:
-            (bool) Status of order cancellation.
+            bool: Status of order cancellation.
         """
         data = self._clean_mapping({
             'OrderNum': order_num,
@@ -331,19 +331,19 @@ class RedOctober(object):
         """ It calls the remote endpoint and returns the result, if success.
 
         Args:
-            endpoint: (str) RedOctober endpoint to call (e.g. ``newcert``).
-            method: (str) HTTP method to utilize for the Request.
+            endpoint (str): RedOctober endpoint to call (e.g. ``newcert``).
+            method (str): HTTP method to utilize for the Request.
             params: (dict|bytes) Data to be sent in the query string
                 for the Request.
             data: (dict|bytes|file) Data to send in the body of the
                 Request.
-        Returns:
-            (mixed) Data contained in ``result`` key of the API response, or
-                ``True`` if there was no response data, but the call was a
-                success.
         Raises:
             RedOctoberRemoteException: In the event of a ``False`` in the
                 ``success`` key of the API response.
+        Returns:
+            mixed: Data contained in ``result`` key of the API response, or
+                ``True`` if there was no response data, but the call was a
+                success.
         """
         endpoint = '%s/%s' % (self.uri_base, endpoint)
         if data:
@@ -371,5 +371,11 @@ class RedOctober(object):
             return True
 
     def _clean_mapping(self, mapping):
-        """ It removes false entries from mapping """
+        """ It removes false entries from mapping.
+
+        Args:
+            mapping (dict): Mapping to remove values from.
+        Returns:
+            dict: Mapping with no values evaluating to False.
+        """
         return {k:v for k, v in mapping.iteritems() if v}
