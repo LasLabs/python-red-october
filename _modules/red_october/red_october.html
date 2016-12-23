@@ -68,11 +68,11 @@
         <span class="sd">&quot;&quot;&quot; It initializes the RedOctober API using the provided credentials.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            host: (str) Host name/IP of Red October server.</span>
-<span class="sd">            port: (int) Port number of server.</span>
-<span class="sd">            name: (str) Account name for use as login.</span>
-<span class="sd">            password: (str) Password for account.</span>
-<span class="sd">            ssl: (bool) Is server SSL encrypted?</span>
+<span class="sd">            host (str): Host name/IP of Red October server.</span>
+<span class="sd">            port (int): Port number of server.</span>
+<span class="sd">            name (str): Account name for use as login.</span>
+<span class="sd">            password (str): Password for account.</span>
+<span class="sd">            ssl (bool): Is server SSL encrypted?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ssl</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span> <span class="k">if</span> <span class="n">ssl</span> <span class="k">else</span> <span class="s1">&#39;http&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uri_base</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">://</span><span class="si">%s</span><span class="s1">:</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ssl</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
@@ -86,7 +86,7 @@
 <span class="sd">        It creates an admin account.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            (bool) Status of vault creation</span>
+<span class="sd">            bool: Status of vault creation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;create&#39;</span><span class="p">)</span></div>
 
@@ -99,11 +99,11 @@
 <span class="sd">        Any new delegation overrides the previous delegation.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            time: (datetime.timedelta) Period of time that delegation is valid</span>
+<span class="sd">            time (datetime.timedelta): Period of time that delegation is valid</span>
 <span class="sd">                for.</span>
-<span class="sd">            uses: (int) Number of times that delegation can be used.</span>
+<span class="sd">            uses (int): Number of times that delegation can be used.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (bool) Status of delegation creation.</span>
+<span class="sd">            bool: Status of delegation creation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="n">time</span> <span class="ow">and</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">s&#39;</span> <span class="o">%</span> <span class="n">time</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
@@ -119,10 +119,10 @@
 <span class="sd">        and if none is provided will default to ``rsa``.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            user_type: (str) Controls how the record is encrypted. This can have</span>
+<span class="sd">            user_type (str): Controls how the record is encrypted. This can have</span>
 <span class="sd">                a value of either ``ecc`` or ``rsa``.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (bool) Status of user creation.</span>
+<span class="sd">            bool: Status of user creation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;UserType&#39;</span><span class="p">:</span> <span class="n">EnumUserType</span><span class="p">[</span><span class="n">user_type</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
@@ -133,7 +133,7 @@
         <span class="sd">&quot;&quot;&quot; It provides a list of keys and delegations for the server.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            (dict) A mapping containing keys on the system, and users who have</span>
+<span class="sd">            dict: A mapping containing keys on the system, and users who have</span>
 <span class="sd">                currently delegated their key to the server. Example:</span>
 
 <span class="sd">                .. code-block:: python</span>
@@ -166,13 +166,13 @@
         <span class="sd">&quot;&quot;&quot; It allows a user to encrypt a piece of data.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            minimum: (int) Minimum number of users from ``owners`` set that</span>
+<span class="sd">            minimum (int): Minimum number of users from ``owners`` set that</span>
 <span class="sd">                must have delegated their keys to the server.</span>
-<span class="sd">            owners: (iter) Iterator of strings indicating users that may</span>
+<span class="sd">            owners (iter): Iterator of strings indicating users that may</span>
 <span class="sd">                decrypt the document.</span>
-<span class="sd">            data: (str) Data to encrypt.</span>
+<span class="sd">            data (str): Data to encrypt.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (str) Base64 encoded string representing the encrypted string.</span>
+<span class="sd">            str: Base64 encoded string representing the encrypted string.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;Minimum&#39;</span><span class="p">:</span> <span class="n">minimum</span><span class="p">,</span>
@@ -185,14 +185,14 @@
         <span class="sd">&quot;&quot;&quot; It allows a user to decrypt a piece of data.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            data: (str) Base64 encoded string representing the encrypted</span>
+<span class="sd">            data (str): Base64 encoded string representing the encrypted</span>
 <span class="sd">                string.</span>
 <span class="sd">        Raises:</span>
 <span class="sd">            RedOctoberDecryptException: If not enough ``minimum`` users from</span>
 <span class="sd">                the set of ``owners`` have delegated their keys to the server,</span>
 <span class="sd">                or if the decryption credentials are incorrect.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (str) Decrypted string</span>
+<span class="sd">            str: Decrypted string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
@@ -206,13 +206,13 @@
         <span class="sd">&quot;&quot;&quot; It provides the delegates required to decrypt a piece of data.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            data: (str) Base64 encoded string representing the encrypted</span>
+<span class="sd">            data (str): Base64 encoded string representing the encrypted</span>
 <span class="sd">                string.</span>
 <span class="sd">        Raises:</span>
 <span class="sd">            RedOctoberDecryptException: If incorrect decryption credentials</span>
 <span class="sd">                are provided.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (list) List of strings representing users that are able to decrypt</span>
+<span class="sd">            list: List of strings representing users that are able to decrypt</span>
 <span class="sd">                the data.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
@@ -227,11 +227,11 @@
         <span class="sd">&quot;&quot;&quot; It allows users to change their password.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name: (str) Name of account.</span>
-<span class="sd">            password: (str) Password for account.</span>
-<span class="sd">            new_password: (str) New password for account.</span>
+<span class="sd">            name (str): Name of account.</span>
+<span class="sd">            password (str): Password for account.</span>
+<span class="sd">            new_password (str): New password for account.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (bool) Password change status.</span>
+<span class="sd">            bool: Password change status.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;NewPassword&#39;</span><span class="p">:</span> <span class="n">new_password</span><span class="p">,</span>
@@ -242,13 +242,13 @@
         <span class="sd">&quot;&quot;&quot; It allows for administration of user roles.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            modify_name: (str) Name of account to modify.</span>
-<span class="sd">            command: (str) Command to apply to user:</span>
+<span class="sd">            modify_name (str): Name of account to modify.</span>
+<span class="sd">            command (str): Command to apply to user:</span>
 <span class="sd">                ``admin``: Promote user to administrator.</span>
 <span class="sd">                ``revoke``: Revoke administrator rights.</span>
 <span class="sd">                ``delete``: Delete user.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (bool) Role modfication status.</span>
+<span class="sd">            bool: Role modfication status.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;ToModify&#39;</span><span class="p">:</span> <span class="n">modify_name</span><span class="p">,</span>
@@ -260,7 +260,7 @@
         <span class="sd">&quot;&quot;&quot; It deletes all delegates for an encryption key.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            (bool) Purge status.</span>
+<span class="sd">            bool: Purge status.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;purge&#39;</span><span class="p">)</span></div>
 
@@ -268,13 +268,13 @@
         <span class="sd">&quot;&quot;&quot; It creates lets others users know delegations are needed.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            labels: (iter) Iterator of strings to label order with.</span>
-<span class="sd">            duration: (datetime.timedelta) Proposed duration of delegation.</span>
-<span class="sd">            uses: (int) Proposed delegation use amounts.</span>
-<span class="sd">            data: (str) Base64 encoded string representing the encrypted</span>
+<span class="sd">            labels (iter): Iterator of strings to label order with.</span>
+<span class="sd">            duration (datetime.timedelta): Proposed duration of delegation.</span>
+<span class="sd">            uses (int): Proposed delegation use amounts.</span>
+<span class="sd">            data (str): Base64 encoded string representing the encrypted</span>
 <span class="sd">                string.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (dict) Mapping representing the newly created order. Example:</span>
+<span class="sd">            dict: Mapping representing the newly created order. Example:</span>
 
 <span class="sd">            .. code-block:: python</span>
 
@@ -307,7 +307,7 @@
         <span class="sd">&quot;&quot;&quot; It returns a mapping of current orders.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            (dict) Mapping representing the currently open orders. Example:</span>
+<span class="sd">            dict: Mapping representing the currently open orders. Example:</span>
 
 <span class="sd">            .. code-block:: python</span>
 
@@ -330,9 +330,9 @@
         <span class="sd">&quot;&quot;&quot; It gets information for a specified order.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            order_num: (str) Order number to get.</span>
+<span class="sd">            order_num (str): Order number to get.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (dict) Mapping representing the order information. Example:</span>
+<span class="sd">            dict: Mapping representing the order information. Example:</span>
 
 <span class="sd">            .. code-block:: python</span>
 
@@ -362,9 +362,9 @@
         <span class="sd">&quot;&quot;&quot; It cancels an order by number.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            order_num: (str) Order number to get.</span>
+<span class="sd">            order_num (str): Order number to get.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (bool) Status of order cancellation.</span>
+<span class="sd">            bool: Status of order cancellation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;OrderNum&#39;</span><span class="p">:</span> <span class="n">order_num</span><span class="p">,</span>
@@ -375,19 +375,19 @@
         <span class="sd">&quot;&quot;&quot; It calls the remote endpoint and returns the result, if success.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            endpoint: (str) RedOctober endpoint to call (e.g. ``newcert``).</span>
-<span class="sd">            method: (str) HTTP method to utilize for the Request.</span>
+<span class="sd">            endpoint (str): RedOctober endpoint to call (e.g. ``newcert``).</span>
+<span class="sd">            method (str): HTTP method to utilize for the Request.</span>
 <span class="sd">            params: (dict|bytes) Data to be sent in the query string</span>
 <span class="sd">                for the Request.</span>
 <span class="sd">            data: (dict|bytes|file) Data to send in the body of the</span>
 <span class="sd">                Request.</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            (mixed) Data contained in ``result`` key of the API response, or</span>
-<span class="sd">                ``True`` if there was no response data, but the call was a</span>
-<span class="sd">                success.</span>
 <span class="sd">        Raises:</span>
 <span class="sd">            RedOctoberRemoteException: In the event of a ``False`` in the</span>
 <span class="sd">                ``success`` key of the API response.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            mixed: Data contained in ``result`` key of the API response, or</span>
+<span class="sd">                ``True`` if there was no response data, but the call was a</span>
+<span class="sd">                success.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">endpoint</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri_base</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
@@ -415,7 +415,13 @@
             <span class="k">return</span> <span class="kc">True</span></div>
 
     <span class="k">def</span> <span class="nf">_clean_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; It removes false entries from mapping &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; It removes false entries from mapping.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mapping (dict): Mapping to remove values from.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Mapping with no values evaluating to False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">}</span></div>
 </pre></div>
 

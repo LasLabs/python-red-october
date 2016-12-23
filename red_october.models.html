@@ -54,25 +54,49 @@
 <dt id="red_october.models.enum_user_role.EnumUserRole">
 <em class="property">class </em><code class="descclassname">red_october.models.enum_user_role.</code><code class="descname">EnumUserRole</code><a class="reference internal" href="_modules/red_october/models/enum_user_role.html#EnumUserRole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.models.enum_user_role.EnumUserRole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
-<p>It provides possible user types.</p>
-<dl class="attribute">
-<dt id="red_october.models.enum_user_role.EnumUserRole.admin">
-<code class="descname">admin</code><em class="property"> = 3</em><a class="headerlink" href="#red_october.models.enum_user_role.EnumUserRole.admin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<p>It provides possible user roles for Red October.</p>
 <dl class="attribute">
 <dt id="red_october.models.enum_user_role.EnumUserRole.delete">
-<code class="descname">delete</code><em class="property"> = 1</em><a class="headerlink" href="#red_october.models.enum_user_role.EnumUserRole.delete" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">delete</code><a class="headerlink" href="#red_october.models.enum_user_role.EnumUserRole.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> &#8211; User is deleted or scheduled to be so.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="red_october.models.enum_user_role.EnumUserRole.revoke">
-<code class="descname">revoke</code><em class="property"> = 2</em><a class="headerlink" href="#red_october.models.enum_user_role.EnumUserRole.revoke" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">revoke</code><a class="headerlink" href="#red_october.models.enum_user_role.EnumUserRole.revoke" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> &#8211; Normal user, revoke administrative rights.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="red_october.models.enum_user_role.EnumUserRole.admin">
+<code class="descname">admin</code><a class="headerlink" href="#red_october.models.enum_user_role.EnumUserRole.admin" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> &#8211; User has administrative rights.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="red_october.models.enum_user_role.EnumUserRole.user">
-<code class="descname">user</code><em class="property"> = 2</em><a class="headerlink" href="#red_october.models.enum_user_role.EnumUserRole.user" title="Permalink to this definition">¶</a></dt>
+<code class="descname">user</code><a class="headerlink" href="#red_october.models.enum_user_role.EnumUserRole.user" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> &#8211; Alias for <cite>revoke</cite>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">admin</code><em class="property"> = 3</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">delete</code><em class="property"> = 1</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">revoke</code><em class="property"> = 2</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">user</code><em class="property"> = 2</em></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -84,15 +108,27 @@
 <dt id="red_october.models.enum_user_type.EnumUserType">
 <em class="property">class </em><code class="descclassname">red_october.models.enum_user_type.</code><code class="descname">EnumUserType</code><a class="reference internal" href="_modules/red_october/models/enum_user_type.html#EnumUserType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.models.enum_user_type.EnumUserType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
-<p>It provides possible user types.</p>
+<p>It provides possible user encryption types for Red October.</p>
+<dl class="attribute">
+<dt id="red_october.models.enum_user_type.EnumUserType.rsa">
+<code class="descname">rsa</code><a class="headerlink" href="#red_october.models.enum_user_type.EnumUserType.rsa" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> &#8211; Uses RSA encryption.</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="red_october.models.enum_user_type.EnumUserType.ecc">
-<code class="descname">ecc</code><em class="property"> = 2</em><a class="headerlink" href="#red_october.models.enum_user_type.EnumUserType.ecc" title="Permalink to this definition">¶</a></dt>
+<code class="descname">ecc</code><a class="headerlink" href="#red_october.models.enum_user_type.EnumUserType.ecc" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> &#8211; Uses ECC encruyption.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">ecc</code><em class="property"> = 2</em></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="red_october.models.enum_user_type.EnumUserType.rsa">
-<code class="descname">rsa</code><em class="property"> = 1</em><a class="headerlink" href="#red_october.models.enum_user_type.EnumUserType.rsa" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">rsa</code><em class="property"> = 1</em></dt>
 <dd></dd></dl>
 
 </dd></dl>

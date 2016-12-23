@@ -50,7 +50,14 @@
 
 
 <div class="viewcode-block" id="EnumUserRole"><a class="viewcode-back" href="../../../red_october.models.html#red_october.models.enum_user_role.EnumUserRole">[docs]</a><span class="k">class</span> <span class="nc">EnumUserRole</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; It provides possible user types. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; It provides possible user roles for Red October.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        delete (int): User is deleted or scheduled to be so.</span>
+<span class="sd">        revoke (int): Normal user, revoke administrative rights.</span>
+<span class="sd">        admin (int): User has administrative rights.</span>
+<span class="sd">        user (int): Alias for `revoke`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">delete</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">revoke</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">admin</span> <span class="o">=</span> <span class="mi">3</span>
