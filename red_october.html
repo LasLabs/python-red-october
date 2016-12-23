@@ -51,15 +51,15 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="red_october.models.html">red_october.models package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="red_october.models.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="red_october.models.html#red-october-models-enum-user-role-module">red_october.models.enum_user_role module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="red_october.models.html#red-october-models-enum-user-type-module">red_october.models.enum_user_type module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="red_october.models.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="red_october.models.html#module-red_october.models.enum_user_role">red_october.models.enum_user_role module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="red_october.models.html#module-red_october.models.enum_user_type">red_october.models.enum_user_type module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="red_october.models.html#module-red_october.models">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="red_october.tests.html">red_october.tests package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="red_october.tests.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="red_october.tests.html#red-october-tests-test-red-october-module">red_october.tests.test_red_october module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="red_october.tests.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="red_october.tests.html#module-red_october.tests.test_red_october">red_october.tests.test_red_october module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="red_october.tests.html#module-red_october.tests">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -68,14 +68,438 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="red-october-exceptions-module">
-<h2>red_october.exceptions module<a class="headerlink" href="#red-october-exceptions-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-red_october.exceptions">
+<span id="red-october-exceptions-module"></span><h2>red_october.exceptions module<a class="headerlink" href="#module-red_october.exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="red_october.exceptions.RedOctoberDecryptException">
+<em class="property">exception </em><code class="descclassname">red_october.exceptions.</code><code class="descname">RedOctoberDecryptException</code><a class="reference internal" href="_modules/red_october/exceptions.html#RedOctoberDecryptException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.exceptions.RedOctoberDecryptException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#red_october.exceptions.RedOctoberException" title="red_october.exceptions.RedOctoberException"><code class="xref py py-class docutils literal"><span class="pre">red_october.exceptions.RedOctoberException</span></code></a></p>
+<p>This exception  is raised when there are errors decrypting a file.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="red_october.exceptions.RedOctoberException">
+<em class="property">exception </em><code class="descclassname">red_october.exceptions.</code><code class="descname">RedOctoberException</code><a class="reference internal" href="_modules/red_october/exceptions.html#RedOctoberException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.exceptions.RedOctoberException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/exceptions.html#exceptions.EnvironmentError" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">exceptions.EnvironmentError</span></code></a></p>
+<p>This exception is raised from errors in the RedOctober Library.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="red_october.exceptions.RedOctoberRemoteException">
+<em class="property">exception </em><code class="descclassname">red_october.exceptions.</code><code class="descname">RedOctoberRemoteException</code><a class="reference internal" href="_modules/red_october/exceptions.html#RedOctoberRemoteException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.exceptions.RedOctoberRemoteException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#red_october.exceptions.RedOctoberException" title="red_october.exceptions.RedOctoberException"><code class="xref py py-class docutils literal"><span class="pre">red_october.exceptions.RedOctoberException</span></code></a></p>
+<p>This exception is raised to indicate issues returned from API.</p>
+</dd></dl>
+
 </div>
-<div class="section" id="red-october-red-october-module">
-<h2>red_october.red_october module<a class="headerlink" href="#red-october-red-october-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-red_october.red_october">
+<span id="red-october-red-october-module"></span><h2>red_october.red_october module<a class="headerlink" href="#module-red_october.red_october" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="red_october.red_october.RedOctober">
+<em class="property">class </em><code class="descclassname">red_october.red_october.</code><code class="descname">RedOctober</code><span class="sig-paren">(</span><em>host</em>, <em>port</em>, <em>name</em>, <em>password</em>, <em>ssl=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It provides Python bindings to a remote RedOctober server via HTTP(S).</p>
+<p>Additional documentation regarding the API endpoints is available at
+<a class="reference external" href="https://github.com/cloudflare/redoctober">https://github.com/cloudflare/redoctober</a></p>
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.call">
+<code class="descname">call</code><span class="sig-paren">(</span><em>endpoint</em>, <em>method='POST'</em>, <em>params=None</em>, <em>data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>It calls the remote endpoint and returns the result, if success.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>endpoint</strong> &#8211; (str) RedOctober endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).</li>
+<li><strong>method</strong> &#8211; (str) HTTP method to utilize for the Request.</li>
+<li><strong>params</strong> &#8211; (dict|bytes) Data to be sent in the query string
+for the Request.</li>
+<li><strong>data</strong> &#8211; (dict|bytes|file) Data to send in the body of the
+Request.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>(mixed) Data contained in <code class="docutils literal"><span class="pre">result</span></code> key of the API response, or</dt>
+<dd><p class="first last"><code class="docutils literal"><span class="pre">True</span></code> if there was no response data, but the call was a
+success.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">RedOctoberRemoteException</span></code> &#8211; In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the
+<code class="docutils literal"><span class="pre">success</span></code> key of the API response.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.cancel_order">
+<code class="descname">cancel_order</code><span class="sig-paren">(</span><em>order_num</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.cancel_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.cancel_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>It cancels an order by number.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>order_num</strong> &#8211; (str) Order number to get.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Status of order cancellation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.change_password">
+<code class="descname">change_password</code><span class="sig-paren">(</span><em>new_password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.change_password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.change_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>It allows users to change their password.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; (str) Name of account.</li>
+<li><strong>password</strong> &#8211; (str) Password for account.</li>
+<li><strong>new_password</strong> &#8211; (str) New password for account.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(bool) Password change status.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.create_order">
+<code class="descname">create_order</code><span class="sig-paren">(</span><em>labels</em>, <em>duration</em>, <em>uses</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.create_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.create_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>It creates lets others users know delegations are needed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>labels</strong> &#8211; (iter) Iterator of strings to label order with.</li>
+<li><strong>duration</strong> &#8211; (datetime.timedelta) Proposed duration of delegation.</li>
+<li><strong>uses</strong> &#8211; (int) Proposed delegation use amounts.</li>
+<li><strong>data</strong> &#8211; (str) Base64 encoded string representing the encrypted
+string.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;Admins&quot;</span><span class="p">:</span> <span class="p">[</span>
+         <span class="s2">&quot;Bob&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Eve&quot;</span>
+     <span class="p">],</span>
+     <span class="s2">&quot;AdminsDelegated&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+     <span class="s2">&quot;Delegated&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+     <span class="s2">&quot;DurationRequested&quot;</span><span class="p">:</span> <span class="mf">3.6e+12</span><span class="p">,</span>
+     <span class="s2">&quot;Labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+         <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;red&quot;</span>
+     <span class="p">],</span>
+     <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;Num&quot;</span><span class="p">:</span> <span class="s2">&quot;77da1cfd8962fb9685c15c84&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;TimeRequested&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-01-25T15:58:41.961906679-08:00&quot;</span><span class="p">,</span>
+ <span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a>) Mapping representing the newly created order. Example</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.create_user">
+<code class="descname">create_user</code><span class="sig-paren">(</span><em>user_type='rsa'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.create_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.create_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>It creates a new user account.</p>
+<p>Allows an optional <code class="docutils literal"><span class="pre">UserType</span></code> to be specified which controls how the
+record is encrypted. This can have a value of either <code class="docutils literal"><span class="pre">rsa</span></code> or <code class="docutils literal"><span class="pre">ecc</span></code>
+and if none is provided will default to <code class="docutils literal"><span class="pre">rsa</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>user_type</strong> &#8211; (str) Controls how the record is encrypted. This can have
+a value of either <code class="docutils literal"><span class="pre">ecc</span></code> or <code class="docutils literal"><span class="pre">rsa</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Status of user creation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.create_vault">
+<code class="descname">create_vault</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.create_vault"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.create_vault" title="Permalink to this definition">¶</a></dt>
+<dd><p>It creates a new vault.</p>
+<p>Create is the necessary first call to a new vault.
+It creates an admin account.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(bool) Status of vault creation</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.decrypt">
+<code class="descname">decrypt</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.decrypt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.decrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>It allows a user to decrypt a piece of data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> &#8211; (str) Base64 encoded string representing the encrypted
+string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">RedOctoberDecryptException</span></code> &#8211; If not enough <code class="docutils literal"><span class="pre">minimum</span></code> users from
+the set of <code class="docutils literal"><span class="pre">owners</span></code> have delegated their keys to the server,
+or if the decryption credentials are incorrect.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(str) Decrypted string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.delegate">
+<code class="descname">delegate</code><span class="sig-paren">(</span><em>time=None</em>, <em>uses=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.delegate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.delegate" title="Permalink to this definition">¶</a></dt>
+<dd><p>It allows for the delegation of decryption rights.</p>
+<p>Delegate allows a user to delegate their decryption password to the
+server for a fixed period of time and for a fixed number of
+decryptions. If the user&#8217;s account is not created, it creates it.
+Any new delegation overrides the previous delegation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>time</strong> &#8211; (datetime.timedelta) Period of time that delegation is valid
+for.</li>
+<li><strong>uses</strong> &#8211; (int) Number of times that delegation can be used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(bool) Status of delegation creation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.encrypt">
+<code class="descname">encrypt</code><span class="sig-paren">(</span><em>minimum</em>, <em>owners</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.encrypt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.encrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>It allows a user to encrypt a piece of data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>minimum</strong> &#8211; (int) Minimum number of users from <code class="docutils literal"><span class="pre">owners</span></code> set that
+must have delegated their keys to the server.</li>
+<li><strong>owners</strong> &#8211; (iter) Iterator of strings indicating users that may
+decrypt the document.</li>
+<li><strong>data</strong> &#8211; (str) Data to encrypt.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(str) Base64 encoded string representing the encrypted string.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.get_order_information">
+<code class="descname">get_order_information</code><span class="sig-paren">(</span><em>order_num</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.get_order_information"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.get_order_information" title="Permalink to this definition">¶</a></dt>
+<dd><p>It gets information for a specified order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>order_num</strong> &#8211; (str) Order number to get.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;Admins&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Bob&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Eve&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;AdminsDelegated&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;Delegated&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;DurationRequested&quot;</span><span class="p">:</span> <span class="mf">3.6e+12</span><span class="p">,</span>
+    <span class="s2">&quot;Labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;red&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Num&quot;</span><span class="p">:</span> <span class="s2">&quot;77da1cfd8962fb9685c15c84&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TimeRequested&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-01-25T15:58:41.961906679-08:00&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a>) Mapping representing the order information. Example</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.get_orders_outstanding">
+<code class="descname">get_orders_outstanding</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.get_orders_outstanding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.get_orders_outstanding" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns a mapping of current orders.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;77da1cfd8962fb9685c15c84&quot;</span><span class="p">:{</span>
+        <span class="s2">&quot;Name&quot;</span><span class="p">:</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Num&quot;</span><span class="p">:</span><span class="s2">&quot;77da1cfd8962fb9685c15c84&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;TimeRequested&quot;</span><span class="p">:</span><span class="s2">&quot;2016-01-25T15:58:41.961906679-08:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;DurationRequested&quot;</span><span class="p">:</span><span class="mi">3600000000000</span><span class="p">,</span>
+        <span class="s2">&quot;Delegated&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;</span>
+        <span class="n">AdminsDelegated</span><span class="s2">&quot;:null,</span>
+        <span class="s2">&quot;Admins&quot;</span><span class="p">:[</span><span class="s2">&quot;Bob, Eve&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;Labels&quot;</span><span class="p">:[</span><span class="s2">&quot;Blue&quot;</span><span class="p">,</span><span class="s2">&quot;Red&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a>) Mapping representing the currently open orders. Example</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.get_owners">
+<code class="descname">get_owners</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.get_owners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.get_owners" title="Permalink to this definition">¶</a></dt>
+<dd><p>It provides the delegates required to decrypt a piece of data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> &#8211; (str) Base64 encoded string representing the encrypted
+string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">RedOctoberDecryptException</span></code> &#8211; If incorrect decryption credentials
+are provided.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>(list) List of strings representing users that are able to decrypt</dt>
+<dd>the data.</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.get_summary">
+<code class="descname">get_summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.get_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.get_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>It provides a list of keys and delegations for the server.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>(dict) A mapping containing keys on the system, and users who have</dt>
+<dd>currently delegated their key to the server. Example:<div class="last highlight-python"><div class="highlight"><pre><span></span> <span class="p">{</span>
+ <span class="s2">&quot;Live&quot;</span><span class="p">:{</span>
+ <span class="s2">&quot;Bill&quot;</span><span class="p">:{</span><span class="s2">&quot;Admin&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+         <span class="s2">&quot;Type&quot;</span><span class="p">:</span><span class="s2">&quot;rsa&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Expiry&quot;</span><span class="p">:</span><span class="s2">&quot;2013-11-26T08:42:29.65501032-08:00&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Uses&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">},</span>
+ <span class="s2">&quot;Cat&quot;</span><span class="p">:{</span><span class="s2">&quot;Admin&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;Type&quot;</span><span class="p">:</span><span class="s2">&quot;rsa&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Expiry&quot;</span><span class="p">:</span><span class="s2">&quot;2013-11-26T08:42:42.016311595-08:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Uses&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">},</span>
+ <span class="s2">&quot;Dodo&quot;</span><span class="p">:{</span><span class="s2">&quot;Admin&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+         <span class="s2">&quot;Type&quot;</span><span class="p">:</span><span class="s2">&quot;rsa&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Expiry&quot;</span><span class="p">:</span><span class="s2">&quot;2013-11-26T08:43:06.651429104-08:00&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Uses&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+<span class="p">},</span>
+<span class="s2">&quot;All&quot;</span><span class="p">:{</span>
+ <span class="s2">&quot;Alice&quot;</span><span class="p">:{</span><span class="s2">&quot;Admin&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span> <span class="s2">&quot;Type&quot;</span><span class="p">:</span><span class="s2">&quot;rsa&quot;</span><span class="p">},</span>
+ <span class="s2">&quot;Bill&quot;</span><span class="p">:{</span><span class="s2">&quot;Admin&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span> <span class="s2">&quot;Type&quot;</span><span class="p">:</span><span class="s2">&quot;rsa&quot;</span><span class="p">},</span>
+ <span class="s2">&quot;Cat&quot;</span><span class="p">:{</span><span class="s2">&quot;Admin&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span> <span class="s2">&quot;Type&quot;</span><span class="p">:</span><span class="s2">&quot;rsa&quot;</span><span class="p">},</span>
+ <span class="s2">&quot;Dodo&quot;</span><span class="p">:{</span><span class="s2">&quot;Admin&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span> <span class="s2">&quot;Type&quot;</span><span class="p">:</span><span class="s2">&quot;rsa&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.modify_user_role">
+<code class="descname">modify_user_role</code><span class="sig-paren">(</span><em>modify_name</em>, <em>command='revoke'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.modify_user_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.modify_user_role" title="Permalink to this definition">¶</a></dt>
+<dd><p>It allows for administration of user roles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>modify_name</strong> &#8211; (str) Name of account to modify.</li>
+<li><strong>command</strong> &#8211; (str) Command to apply to user:
+<code class="docutils literal"><span class="pre">admin</span></code>: Promote user to administrator.
+<code class="docutils literal"><span class="pre">revoke</span></code>: Revoke administrator rights.
+<code class="docutils literal"><span class="pre">delete</span></code>: Delete user.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(bool) Role modfication status.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="red_october.red_october.RedOctober.purge_delegates">
+<code class="descname">purge_delegates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/red_october/red_october.html#RedOctober.purge_delegates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#red_october.red_october.RedOctober.purge_delegates" title="Permalink to this definition">¶</a></dt>
+<dd><p>It deletes all delegates for an encryption key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(bool) Purge status.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-red_october">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-red_october" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -123,9 +547,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#red-october-exceptions-module">red_october.exceptions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#red-october-red-october-module">red_october.red_october module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-red_october.exceptions">red_october.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-red_october.red_october">red_october.red_october module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-red_october">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tests.html">tests module</a></li>
