@@ -1,0 +1,38 @@
+python-red-october.red_october package
+======================================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    python-red-october.red_october.models
+    python-red-october.red_october.tests
+
+Submodules
+----------
+
+python-red-october.red_october.exceptions module
+------------------------------------------------
+
+.. automodule:: python-red-october.red_october.exceptions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+python-red-october.red_october.red_october module
+-------------------------------------------------
+
+.. automodule:: python-red-october.red_october.red_october
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: python-red-october.red_october
+    :members:
+    :undoc-members:
+    :show-inheritance:
