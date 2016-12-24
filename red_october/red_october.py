@@ -337,9 +337,9 @@ class RedOctober(object):
         Args:
             endpoint (str): RedOctober endpoint to call (e.g. ``newcert``).
             method (str): HTTP method to utilize for the Request.
-            params: (dict|bytes) Data to be sent in the query string
+            params: (dict or bytes) Data to be sent in the query string
                 for the Request.
-            data: (dict|bytes|file) Data to send in the body of the
+            data: (dict or bytes or file) Data to send in the body of the
                 Request.
         Raises:
             RedOctoberRemoteException: In the event of a ``False`` in the
@@ -350,16 +350,17 @@ class RedOctober(object):
                 success.
         """
         endpoint = '%s/%s' % (self.uri_base, endpoint)
-        if data:
-            data.update({
-                'Name': self.name,
-                'Password': self.password,
-            })
+        if data is None:
+            data = {}
+        data.update({
+            'Name': self.name,
+            'Password': self.password,
+        })
         response = requests.request(
             method=method,
             url=endpoint,
             params=params,
-            data=data,
+            json=data,
             verify=self.verify,
         )
         response = response.json()

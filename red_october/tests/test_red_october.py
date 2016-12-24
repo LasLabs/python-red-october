@@ -196,7 +196,7 @@ class TestRedOctober(unittest.TestCase):
             method='method',
             url='https://test:1/endpoint',
             params='params',
-            data=data,
+            json=data,
             verify=True,
         )
 
