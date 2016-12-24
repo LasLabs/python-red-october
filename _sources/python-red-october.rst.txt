@@ -8,18 +8,6 @@ Subpackages
 
     python-red-october.red_october
 
-Submodules
-----------
-
-python-red-october.tests module
--------------------------------
-
-.. automodule:: python-red-october.tests
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
 Module contents
 ---------------
 
