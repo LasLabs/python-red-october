@@ -8,6 +8,18 @@ Subpackages
 
     python-red-october.red_october
 
+Submodules
+----------
+
+python-red-october.setup module
+-------------------------------
+
+.. automodule:: python-red-october.setup
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 Module contents
 ---------------
 

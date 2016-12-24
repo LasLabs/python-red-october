@@ -1,0 +1,7 @@
+python-red-october
+==================
+
+.. toctree::
+   :maxdepth: 4
+
+   python-red-october
