@@ -2,6 +2,7 @@
 # Copyright 2016 LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
+import json
 import requests
 
 from datetime import timedelta
@@ -188,9 +189,12 @@ class RedOctober(object):
                 'Password': password,
             })
         try:
-            return self.call('decrypt', data=data)
+            data = self.call('decrypt', data=data)
         except RedOctoberRemoteException as e:
             raise RedOctoberDecryptException(e.message)
+        data = json.loads(data.decode('base64'))
+        return data['Data']
+
 
     def get_owners(self, data):
         """ It provides the delegates required to decrypt a piece of data.
@@ -397,15 +401,9 @@ class RedOctober(object):
         response = response.json()
         if response['Status'] != 'ok':
             raise RedOctoberRemoteException(
-                '\n'.join([
-                    'Response:',
-                    '\n'.join(response.get('Response', [])),
-                ])
+                response['Status'],
             )
-        try:
-            return response['Response']
-        except KeyError:
-            return True
+        return response.get('Response', True)
 
     def _clean_mapping(self, mapping):
         """ It removes false entries from mapping.

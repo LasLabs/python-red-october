@@ -41,6 +41,106 @@ Usage
 
 * `Read The API Documentation <https://laslabs.github.io/python-red-october>`_
 
+Connect to Red October
+----------------------
+
+Connect to a Red October instance ``https://172.17.0.2:8080`` as ``Admin`` with the password ``password``:
+
+.. code-block:: python
+
+    from red_october import RedOctober
+    ro = RedOctober('172.17.0.2', 8080, 'Admin', 'password')
+
+Turn off certificate verification:
+
+.. code-block:: python
+
+    from red_october import RedOctober
+    ro = RedOctober('172.17.0.2', 8080, 'Admin', 'password', verify=False)
+
+Create a Vault
+--------------
+
+This will create a vault using the currently logged in credentials as the first admin:
+
+.. code-block:: python
+
+    ro.create_vault()
+
+Create a User
+-------------
+
+If you would like to create a user for the currently logged in session:
+
+.. code-block:: python
+
+    ro.create_user('rsa')
+
+If you are currently playing the role of an administrator, you can also create a user for someone else:
+
+.. code-block:: python
+
+   ro.create_user('ecc', name="Ashley", password="@shl3y!")
+
+Delegate Decryption Rights
+--------------------------
+
+In order to decrypt a piece of data, the Vault will need to be delegated decryption rights
+by document owners.
+
+In order to delegate rights to a Vault, and subsequently grant access to your data:
+
+.. code-block:: python
+
+    from datetime import timedelta
+    delegate_time = timedelta(days=1)
+    delegate_uses = 20
+    ro.delegate(delegate_time, delegate_uses)
+
+The above delegation will expire in 1 day or 20 uses, whichever comes first.
+
+Encrypt Some Data
+-----------------
+
+To encrypt some data so that only you can decrypt it:
+
+.. code-block:: python
+
+    data = 'Super Secret Stuff!'
+    encrypted = ro.encrypt(data)
+
+To encrypt some data with multiple owners, also setting a minimum amount of delegations
+that are required for decryption:
+
+.. code-block:: python
+
+    owners = ['Admin', 'Ashley', 'Bob', 'Jenna']
+    minimum_delegations = 2
+    data = 'Super Secret Stuff!'
+    encrypted = ro.encrypt(data, owners, minimum_delegations)
+
+To encrypt data as another user:
+
+.. code-block:: python
+
+    data = 'Super Secret Stuff!'
+    encrypted_string = ro.encrypt(data, name='Todd', password='Todd Pass')
+
+Decrypt Some Data
+-----------------
+
+Decryption will use the current session credentials by default:
+
+.. code-block:: python
+
+    decrypted_string = ro.decrypt(encrypted_string)
+
+To decrypt as another user:
+
+.. code-block:: python
+    
+    decrypted_string = ro.decrypt(encrypted_string, name='Todd', password='Todd Pass')
+
 Known Issues / Road Map
 =======================
 
