@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>red_october.red_october &#8212; Python Red October 0.0.2b158 documentation</title>
+    <title>red_october.red_october &#8212; Python Red October 0.0.2b163 documentation</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.0.2b158',
+        VERSION:     '0.0.2b163',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -381,9 +381,9 @@
 <span class="sd">        Args:</span>
 <span class="sd">            endpoint (str): RedOctober endpoint to call (e.g. ``newcert``).</span>
 <span class="sd">            method (str): HTTP method to utilize for the Request.</span>
-<span class="sd">            params: (dict|bytes) Data to be sent in the query string</span>
+<span class="sd">            params: (dict or bytes) Data to be sent in the query string</span>
 <span class="sd">                for the Request.</span>
-<span class="sd">            data: (dict|bytes|file) Data to send in the body of the</span>
+<span class="sd">            data: (dict or bytes or file) Data to send in the body of the</span>
 <span class="sd">                Request.</span>
 <span class="sd">        Raises:</span>
 <span class="sd">            RedOctoberRemoteException: In the event of a ``False`` in the</span>
@@ -394,16 +394,17 @@
 <span class="sd">                success.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">endpoint</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri_base</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
-                <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="s1">&#39;Password&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
-            <span class="p">})</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;Password&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
+        <span class="p">})</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span>
             <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
             <span class="n">url</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-            <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
             <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verify</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
