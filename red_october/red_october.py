@@ -2,6 +2,7 @@
 # Copyright 2016 LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
+import json
 import requests
 
 from datetime import timedelta
@@ -71,7 +72,7 @@ class RedOctober(object):
         })
         return self.call('delegate', data=data)
 
-    def create_user(self, user_type='rsa'):
+    def create_user(self, user_type='rsa', name=None, password=None):
         """ It creates a new user account.
 
         Allows an optional ``UserType`` to be specified which controls how the
@@ -81,12 +82,22 @@ class RedOctober(object):
         Args:
             user_type (str): Controls how the record is encrypted. This can have
                 a value of either ``ecc`` or ``rsa``.
+            name (str, optional): Account name for use as login. Omit to use
+                current session credentials.
+            password (str, optional): Password for account. Omit to use
+                current session credentials.
         Returns:
             bool: Status of user creation.
         """
+
         data = self._clean_mapping({
             'UserType': EnumUserType[user_type].name.upper(),
         })
+        if name and password:
+            data.update({
+                'Name': name,
+                'Password': password,
+            })
         return self.call('create-user', data=data)
 
     def get_summary(self):
@@ -122,31 +133,46 @@ class RedOctober(object):
         """
         return self.call('summary')
 
-    def encrypt(self, minimum, owners, data):
+    def encrypt(self, data, owners=None, minimum=1, name=None, password=None):
         """ It allows a user to encrypt a piece of data.
 
         Args:
-            minimum (int): Minimum number of users from ``owners`` set that
-                must have delegated their keys to the server.
-            owners (iter): Iterator of strings indicating users that may
-                decrypt the document.
             data (str): Data to encrypt.
+            owners (iter of str, optional): Representing the users that may
+                decrypt the document. None for self-owned.
+            minimum (int, optional): Minimum number of users from ``owners``
+                 set that must have delegated their keys to the server.
+            name (str, optional): Account name for use as login. Omit to use
+                current session credentials.
+            password (str, optional): Password for account. Omit to use
+                current session credentials.
         Returns:
             str: Base64 encoded string representing the encrypted string.
         """
+        if owners is None:
+            owners = [self.name]
         data = self._clean_mapping({
             'Minimum': minimum,
             'Owners': owners,
             'Data': data.encode('base64'),
         })
+        if name and password:
+            data.update({
+                'Name': name,
+                'Password': password,
+            })
         return self.call('encrypt', data=data)
 
-    def decrypt(self, data):
+    def decrypt(self, data, name=None, password=None):
         """ It allows a user to decrypt a piece of data.
 
         Args:
             data (str): Base64 encoded string representing the encrypted
                 string.
+            name (str, optional): Account name for use as login. Omit to use
+                current session credentials.
+            password (str, optional): Password for account. Omit to use
+                current session credentials.
         Raises:
             RedOctoberDecryptException: If not enough ``minimum`` users from
                 the set of ``owners`` have delegated their keys to the server,
@@ -157,10 +183,18 @@ class RedOctober(object):
         data = self._clean_mapping({
             'Data': data,
         })
+        if name and password:
+            data.update({
+                'Name': name,
+                'Password': password,
+            })
         try:
-            return self.call('decrypt', data=data)
+            data = self.call('decrypt', data=data)
         except RedOctoberRemoteException as e:
             raise RedOctoberDecryptException(e.message)
+        data = json.loads(data.decode('base64'))
+        return data['Data']
+
 
     def get_owners(self, data):
         """ It provides the delegates required to decrypt a piece of data.
@@ -337,9 +371,9 @@ class RedOctober(object):
         Args:
             endpoint (str): RedOctober endpoint to call (e.g. ``newcert``).
             method (str): HTTP method to utilize for the Request.
-            params: (dict|bytes) Data to be sent in the query string
+            params: (dict or bytes) Data to be sent in the query string
                 for the Request.
-            data: (dict|bytes|file) Data to send in the body of the
+            data: (dict or bytes or file) Data to send in the body of the
                 Request.
         Raises:
             RedOctoberRemoteException: In the event of a ``False`` in the
@@ -350,7 +384,9 @@ class RedOctober(object):
                 success.
         """
         endpoint = '%s/%s' % (self.uri_base, endpoint)
-        if data:
+        if data is None:
+            data = {}
+        if 'Name' not in data:
             data.update({
                 'Name': self.name,
                 'Password': self.password,
@@ -359,21 +395,15 @@ class RedOctober(object):
             method=method,
             url=endpoint,
             params=params,
-            data=data,
+            json=data,
             verify=self.verify,
         )
         response = response.json()
         if response['Status'] != 'ok':
             raise RedOctoberRemoteException(
-                '\n'.join([
-                    'Response:',
-                    '\n'.join(response.get('Response', [])),
-                ])
+                response['Status'],
             )
-        try:
-            return response['Response']
-        except KeyError:
-            return True
+        return response.get('Response', True)
 
     def _clean_mapping(self, mapping):
         """ It removes false entries from mapping.
