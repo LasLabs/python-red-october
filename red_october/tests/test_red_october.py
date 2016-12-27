@@ -197,6 +197,7 @@ class TestRedOctober(unittest.TestCase):
             url='https://test:1/endpoint',
             params='params',
             data=data,
+            verify=True,
         )
 
     @mock.patch.object(requests, 'request')

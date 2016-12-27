@@ -20,7 +20,7 @@ class RedOctober(object):
     https://github.com/cloudflare/redoctober
     """
 
-    def __init__(self, host, port, name, password, ssl=True):
+    def __init__(self, host, port, name, password, ssl=True, verify=True):
         """ It initializes the RedOctober API using the provided credentials.
 
         Args:
@@ -29,11 +29,15 @@ class RedOctober(object):
             name (str): Account name for use as login.
             password (str): Password for account.
             ssl (bool): Is server SSL encrypted?
+            verify (bool or str): File path of CA cert for verification,
+                `True` to use system certs, or `False` to disable certificate
+                verification.
         """
         ssl = 'https' if ssl else 'http'
         self.uri_base = '%s://%s:%d' % (ssl, host, port)
         self.name = name
         self.password = password
+        self.verify = verify
 
     def create_vault(self):
         """ It creates a new vault.
@@ -356,6 +360,7 @@ class RedOctober(object):
             url=endpoint,
             params=params,
             data=data,
+            verify=self.verify,
         )
         response = response.json()
         if response['Status'] != 'ok':
