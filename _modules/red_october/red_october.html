@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>red_october.red_october &#8212; Python Red October 0.0.2b122 documentation</title>
+    <title>red_october.red_october &#8212; Python Red October 0.1.0b154 documentation</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.0.2b122',
+        VERSION:     '0.1.0b154',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -64,7 +64,7 @@
 <span class="sd">    https://github.com/cloudflare/redoctober</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It initializes the RedOctober API using the provided credentials.</span>
 
 <span class="sd">        Args:</span>
@@ -73,11 +73,15 @@
 <span class="sd">            name (str): Account name for use as login.</span>
 <span class="sd">            password (str): Password for account.</span>
 <span class="sd">            ssl (bool): Is server SSL encrypted?</span>
+<span class="sd">            verify (bool or str): File path of CA cert for verification,</span>
+<span class="sd">                `True` to use system certs, or `False` to disable certificate</span>
+<span class="sd">                verification.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ssl</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span> <span class="k">if</span> <span class="n">ssl</span> <span class="k">else</span> <span class="s1">&#39;http&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uri_base</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">://</span><span class="si">%s</span><span class="s1">:</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ssl</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verify</span> <span class="o">=</span> <span class="n">verify</span>
 
 <div class="viewcode-block" id="RedOctober.create_vault"><a class="viewcode-back" href="../../red_october.html#red_october.red_october.RedOctober.create_vault">[docs]</a>    <span class="k">def</span> <span class="nf">create_vault</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It creates a new vault.</span>
@@ -400,6 +404,7 @@
             <span class="n">url</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verify</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;ok&#39;</span><span class="p">:</span>
@@ -463,6 +468,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../red_october.html">red_october package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../setup.html">setup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tests.html">tests module</a></li>
 </ul>
 
 
