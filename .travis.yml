@@ -13,8 +13,8 @@ virtualenv:
 
 env:
   global:
-    - VERSION="0.1.0"
-    - RELEASE="0.0.2"
+    - VERSION="0.2"
+    - RELEASE="0.2.1"
     - PROJECT="Python Red October"
     - BRANCH_PROD="master"
     - BRANCH_DOC="gh-pages"
