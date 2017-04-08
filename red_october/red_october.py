@@ -373,10 +373,7 @@ class RedOctober(object):
         response = response.json()
         if response['Status'] != 'ok':
             raise RedOctoberRemoteException(
-                '\n'.join([
-                    'Response:',
-                    '\n'.join(response.get('Response', [])),
-                ])
+                response['Status'],
             )
         try:
             return response['Response']
