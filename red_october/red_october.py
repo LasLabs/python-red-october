@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 LasLabs Inc.
+# Copyright 2016-2017 LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
+import json
 import requests
 
 from datetime import timedelta
@@ -152,13 +153,19 @@ class RedOctober(object):
                 the set of ``owners`` have delegated their keys to the server,
                 or if the decryption credentials are incorrect.
         Returns:
-            str: Decrypted string
+            dict: Response object with the following keys:
+                * `Data` (`str`): Decrypted data
+                * `Secure` (`bool`): Not documented. Seems to always be `True`
+                * `Delegates` (`list` of `str`): Delegate names
         """
         data = self._clean_mapping({
             'Data': data,
         })
         try:
-            return self.call('decrypt', data=data)
+            response = self.call('decrypt', data=data)
+            response = json.loads(response.decode('base64'))
+            response['Data'] = response['Data'].decode('base64')
+            return response
         except RedOctoberRemoteException as e:
             raise RedOctoberDecryptException(e.message)
 
@@ -366,10 +373,7 @@ class RedOctober(object):
         response = response.json()
         if response['Status'] != 'ok':
             raise RedOctoberRemoteException(
-                '\n'.join([
-                    'Response:',
-                    '\n'.join(response.get('Response', [])),
-                ])
+                response['Status'],
             )
         try:
             return response['Response']

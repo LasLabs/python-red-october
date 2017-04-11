@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 LasLabs Inc.
+# Copyright 2016-2017 LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
+import json
 import mock
 import unittest
 
@@ -87,13 +88,30 @@ class TestRedOctober(unittest.TestCase):
         call.assert_called_once_with('encrypt', data=expect)
 
     @mock.patch.object(RedOctober, 'call')
-    def test_decrypt(self, call):
+    def test_decrypt_call(self, call):
         """ It should call with proper args """
         expect = {
             'Data': self.data64,
         }
+        response = {
+            'Data': self.data64,
+        }
+        call.return_value = json.dumps(response).encode('base64')
         self.red_october.decrypt(self.data64)
         call.assert_called_once_with('decrypt', data=expect)
+
+    @mock.patch.object(RedOctober, 'call')
+    def test_decrypt_return(self, call):
+        """ It should return proper value. """
+        expect = {
+            'Data': self.data64,
+            'Secure': True,
+            'Delegates': self.owners,
+        }
+        call.return_value = json.dumps(expect).encode('base64')
+        res = self.red_october.decrypt(self.data64)
+        expect['Data'] = expect['Data'].decode('base64')
+        self.assertDictEqual(res, expect)
 
     @mock.patch.object(RedOctober, 'call')
     def test_decrypt_fail(self, call):
