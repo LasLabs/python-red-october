@@ -1,11 +1,11 @@
-red_october.tests package
-=========================
+red\_october\.tests package
+===========================
 
 Submodules
 ----------
 
-red_october.tests.test_red_october module
------------------------------------------
+red\_october\.tests\.test\_red\_october module
+----------------------------------------------
 
 .. automodule:: red_october.tests.test_red_october
     :members:

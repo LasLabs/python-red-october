@@ -1,5 +1,5 @@
-red_october package
-===================
+red\_october package
+====================
 
 Subpackages
 -----------
@@ -12,16 +12,16 @@ Subpackages
 Submodules
 ----------
 
-red_october.exceptions module
------------------------------
+red\_october\.exceptions module
+-------------------------------
 
 .. automodule:: red_october.exceptions
     :members:
     :undoc-members:
     :show-inheritance:
 
-red_october.red_october module
-------------------------------
+red\_october\.red\_october module
+---------------------------------
 
 .. automodule:: red_october.red_october
     :members:

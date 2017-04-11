@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>red_october package &#8212; Python Red October 0.0.2b163 documentation</title>
+    <title>red_october package &#8212; Python Red October 0.2.1b173 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.0.2b163',
+        VERSION:     '0.2.1b173',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -283,9 +283,18 @@ string.</td>
 the set of <code class="docutils literal"><span class="pre">owners</span></code> have delegated their keys to the server,
 or if the decryption credentials are incorrect.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Decrypted string</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>Response object with the following keys:</dt>
+<dd><ul class="first last simple">
+<li><cite>Data</cite> (<cite>str</cite>): Decrypted data</li>
+<li><cite>Secure</cite> (<cite>bool</cite>): Not documented. Seems to always be <cite>True</cite></li>
+<li><cite>Delegates</cite> (<cite>list</cite> of <cite>str</cite>): Delegate names</li>
+</ul>
+</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -618,7 +627,7 @@ with Red October is encrypted with TLS, ensuring that passwords are not sent in 
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016 LasLabs Inc..
+      &copy;2017 LasLabs Inc..
       
       |
       <a href="_sources/red_october.rst.txt"

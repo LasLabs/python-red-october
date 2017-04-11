@@ -1,19 +1,19 @@
-red_october.models package
-==========================
+red\_october\.models package
+============================
 
 Submodules
 ----------
 
-red_october.models.enum_user_role module
-----------------------------------------
+red\_october\.models\.enum\_user\_role module
+---------------------------------------------
 
 .. automodule:: red_october.models.enum_user_role
     :members:
     :undoc-members:
     :show-inheritance:
 
-red_october.models.enum_user_type module
-----------------------------------------
+red\_october\.models\.enum\_user\_type module
+---------------------------------------------
 
 .. automodule:: red_october.models.enum_user_type
     :members:
