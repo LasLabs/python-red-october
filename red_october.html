@@ -1,20 +1,17 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>red_october package &#8212; Python Red October 0.2.1b173 documentation</title>
-    
+    <title>red_october package &#8212; Python Red October 0.2.1b174 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.1b173',
+        VERSION:     '0.2.1b174',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -110,16 +107,16 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; RedOctober endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).</li>
-<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; HTTP method to utilize for the Request.</li>
-<li><strong>params</strong> &#8211; (dict or bytes) Data to be sent in the query string
+<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – RedOctober endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).</li>
+<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – HTTP method to utilize for the Request.</li>
+<li><strong>params</strong> – (dict or bytes) Data to be sent in the query string
 for the Request.</li>
-<li><strong>data</strong> &#8211; (dict or bytes or file) Data to send in the body of the
+<li><strong>data</strong> – (dict or bytes or file) Data to send in the body of the
 Request.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal"><span class="pre">RedOctoberRemoteException</span></code> &#8211; In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal"><span class="pre">RedOctoberRemoteException</span></code> – In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the
 <code class="docutils literal"><span class="pre">success</span></code> key of the API response.</p>
 </td>
 </tr>
@@ -147,7 +144,7 @@ success.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>order_num</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Order number to get.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>order_num</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Order number to get.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Status of order cancellation.</td>
 </tr>
@@ -166,9 +163,9 @@ success.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of account.</li>
-<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Password for account.</li>
-<li><strong>new_password</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; New password for account.</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of account.</li>
+<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Password for account.</li>
+<li><strong>new_password</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – New password for account.</li>
 </ul>
 </td>
 </tr>
@@ -191,10 +188,10 @@ success.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>labels</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#iter" title="(in Python v2.7)"><em>iter</em></a>) &#8211; Iterator of strings to label order with.</li>
-<li><strong>duration</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.timedelta" title="(in Python v2.7)"><em>datetime.timedelta</em></a>) &#8211; Proposed duration of delegation.</li>
-<li><strong>uses</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Proposed delegation use amounts.</li>
-<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Base64 encoded string representing the encrypted
+<li><strong>labels</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#iter" title="(in Python v2.7)"><em>iter</em></a>) – Iterator of strings to label order with.</li>
+<li><strong>duration</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.timedelta" title="(in Python v2.7)"><em>datetime.timedelta</em></a>) – Proposed duration of delegation.</li>
+<li><strong>uses</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Proposed delegation use amounts.</li>
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Base64 encoded string representing the encrypted
 string.</li>
 </ul>
 </td>
@@ -239,7 +236,7 @@ and if none is provided will default to <code class="docutils literal"><span cla
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>user_type</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Controls how the record is encrypted. This can have
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>user_type</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Controls how the record is encrypted. This can have
 a value of either <code class="docutils literal"><span class="pre">ecc</span></code> or <code class="docutils literal"><span class="pre">rsa</span></code>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Status of user creation.</td>
@@ -276,10 +273,10 @@ It creates an admin account.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Base64 encoded string representing the encrypted
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Base64 encoded string representing the encrypted
 string.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">RedOctoberDecryptException</span></code> &#8211; If not enough <code class="docutils literal"><span class="pre">minimum</span></code> users from
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">RedOctoberDecryptException</span></code> – If not enough <code class="docutils literal"><span class="pre">minimum</span></code> users from
 the set of <code class="docutils literal"><span class="pre">owners</span></code> have delegated their keys to the server,
 or if the decryption credentials are incorrect.</td>
 </tr>
@@ -306,16 +303,16 @@ or if the decryption credentials are incorrect.</td>
 <dd><p>It allows for the delegation of decryption rights.</p>
 <p>Delegate allows a user to delegate their decryption password to the
 server for a fixed period of time and for a fixed number of
-decryptions. If the user&#8217;s account is not created, it creates it.
+decryptions. If the user’s account is not created, it creates it.
 Any new delegation overrides the previous delegation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>time</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.timedelta" title="(in Python v2.7)"><em>datetime.timedelta</em></a>) &#8211; Period of time that delegation is valid
+<li><strong>time</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.timedelta" title="(in Python v2.7)"><em>datetime.timedelta</em></a>) – Period of time that delegation is valid
 for.</li>
-<li><strong>uses</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of times that delegation can be used.</li>
+<li><strong>uses</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Number of times that delegation can be used.</li>
 </ul>
 </td>
 </tr>
@@ -338,11 +335,11 @@ for.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>minimum</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Minimum number of users from <code class="docutils literal"><span class="pre">owners</span></code> set that
+<li><strong>minimum</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Minimum number of users from <code class="docutils literal"><span class="pre">owners</span></code> set that
 must have delegated their keys to the server.</li>
-<li><strong>owners</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#iter" title="(in Python v2.7)"><em>iter</em></a>) &#8211; Iterator of strings indicating users that may
+<li><strong>owners</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#iter" title="(in Python v2.7)"><em>iter</em></a>) – Iterator of strings indicating users that may
 decrypt the document.</li>
-<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Data to encrypt.</li>
+<li><strong>data</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Data to encrypt.</li>
 </ul>
 </td>
 </tr>
@@ -364,7 +361,7 @@ decrypt the document.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>order_num</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Order number to get.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>order_num</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Order number to get.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Mapping representing the order information. Example:<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;Admins&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -430,10 +427,10 @@ decrypt the document.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Base64 encoded string representing the encrypted
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Base64 encoded string representing the encrypted
 string.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">RedOctoberDecryptException</span></code> &#8211; If incorrect decryption credentials
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">RedOctoberDecryptException</span></code> – If incorrect decryption credentials
 are provided.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
@@ -442,7 +439,7 @@ are provided.</td>
 </dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)">list</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -500,8 +497,8 @@ are provided.</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>modify_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of account to modify.</li>
-<li><strong>command</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Command to apply to user:
+<li><strong>modify_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of account to modify.</li>
+<li><strong>command</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Command to apply to user:
 <code class="docutils literal"><span class="pre">admin</span></code>: Promote user to administrator.
 <code class="docutils literal"><span class="pre">revoke</span></code>: Revoke administrator rights.
 <code class="docutils literal"><span class="pre">delete</span></code>: Delete user.</li>
